@@ -1,0 +1,18 @@
+@import "tailwindcss";
+@plugin "flyonui" {
+  themes: shadcn --default, black --prefersdark;
+}
+@import "flyonui/variants.css";
+@source "./node_modules/flyonui/flyonui.js";
+
+@layer utilities {
+  .btn-not-scale {
+    @apply scale-100; /* или любой другой эффект */
+  }
+
+  .btn-not-scale:active:hover:not(.btn-active),
+  .btn-not-scale:active:focus:not(.btn-active) {
+    @apply scale-100;
+    @apply transition-all;
+  }
+}
