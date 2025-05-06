@@ -1,6 +1,6 @@
 @import "tailwindcss";
 @plugin "flyonui" {
-  themes: shadcn --default, black --prefersdark;
+  themes: light --default, black --prefersdark;
 }
 @import "flyonui/variants.css";
 @source "./node_modules/flyonui/flyonui.js";

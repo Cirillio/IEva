@@ -1,10 +1,10 @@
 import { Icon } from "@/icons";
-
-const MenuButton = ({ url, title, icon, alert }) => (
+import { Link } from "react-router-dom";
+const MenuButton = ({ to, title, icon, alert }) => (
   <>
-    <a
-      href={"/" + url}
-      className="btn btn-lg btn-text rounded-full max-w-fit aspect-square xl:aspect-auto p-0 xl:px-4"
+    <Link
+      to={"/" + to}
+      className="btn md:btn-lg btn-md btn-text rounded-full max-w-fit aspect-square xl:aspect-auto p-0 px-4"
     >
       <div className="indicator">
         <Icon name={icon} size="28" />
@@ -18,7 +18,7 @@ const MenuButton = ({ url, title, icon, alert }) => (
         )}
       </div>
       <span className="mx-4 xl:flex min-[100px]:hidden">{title}</span>
-    </a>
+    </Link>
   </>
 );
 

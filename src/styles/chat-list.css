@@ -1,0 +1,7 @@
+#chat-list {
+  width: 100%;
+}
+
+#chat-list.active {
+  width: 72px;
+}
