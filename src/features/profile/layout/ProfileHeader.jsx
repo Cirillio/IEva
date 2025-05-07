@@ -4,7 +4,7 @@ import { UserTag } from "./UserTag";
 function Header() {
   return (
     <>
-      <div className="w-full max-h-60 ">
+      <div className="w-full max-h-60 z-0">
         <picture className="w-full h-full overflow-hidden flex relative">
           <img
             src="/public/covers/cov1.png"

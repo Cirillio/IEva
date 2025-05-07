@@ -18,6 +18,7 @@ const Header = () => (
       <ThemeToggler />
     </div>
     <UserButton name={"Cirillio"} username={"imcirillio"} avatar={"av1.png"} />
+
     <SideMenu buttons={menuButtons} />
   </header>
 );

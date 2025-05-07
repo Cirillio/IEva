@@ -4,7 +4,6 @@
 }
 @import "flyonui/variants.css";
 @source "./node_modules/flyonui/flyonui.js";
-
 @layer utilities {
   .btn-not-scale {
     @apply scale-100; /* или любой другой эффект */

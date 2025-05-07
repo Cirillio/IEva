@@ -2,7 +2,7 @@ import { useEffect, useMemo } from "react";
 import "@/styles/chat-list.css";
 import { AnimatePresence, motion } from "framer-motion";
 import { Link, useParams } from "react-router-dom";
-import { ParamMinButton } from "../../components/ui/ParamMinButton";
+import { ParamMenu } from "../../components/ui/functional/ParamButton/ParamMenu";
 import { useAppDispatch, useAppSelector } from "../../app/hooks";
 import { openChat, closeChat } from "./ChatSlice";
 import { ChatList } from "./components/ChatList";
@@ -52,7 +52,7 @@ export function MessangerPage() {
         id="chat-list"
         className={`${
           chatState ? "active" : ""
-        } h-full transition-all duration-400 p-0 flex-col items-center sm:flex min-[100px]:hidden`}
+        } h-full transition-all  duration-400 p-0 flex-col items-center sm:flex min-[100px]:hidden`}
       >
         <ChatList members={chat_members} />
       </div>
@@ -64,7 +64,7 @@ export function MessangerPage() {
           {chatState ? (
             <motion.div
               key="current-chat"
-              className="w-full flex h-full flex-col items-center rounded-2xl shadow-base-300/20 shadow-md"
+              className="w-full flex h-full flex-col items-center rounded-2xl shadow-neutral/20 shadow-sm"
               initial={{ opacity: 0, scale: 0.98 }}
               animate={{ opacity: 1, scale: 1 }}
               exit={{ opacity: 0, scale: 0.98 }}
@@ -74,14 +74,14 @@ export function MessangerPage() {
                 <Link
                   to="/messanger"
                   onClick={() => dispatch(closeChat())}
-                  className="chat-window__close btn my-auto btn-circle btn-primary"
+                  className="chat-window__close btn my-auto btn-circle btn-primary "
                 >
                   X
                 </Link>
-                <h2 className="py-1 px-2 bg-base-200  mr-auto flex items-center shadow-md rounded-full">
+                <h2 className="py-1 px-2 bg-base-200  mr-auto flex items-center shadow-neutral/20 shadow-sm rounded-full">
                   Chat Window - {chatMember.name}
                 </h2>
-                <ParamMinButton />
+                <ParamMenu />
               </div>
               <div className="w-full flex-1 h-full flex flex-col rounded-2xl px-1 sm:px-4">
                 <div className="h-full w-full bg-base-100/20"></div>

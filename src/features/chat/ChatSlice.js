@@ -13,7 +13,6 @@ export const chatSlice = createSlice({
     openChat: (state, action) => {
       state.id = action.payload.id;
       state.member = action.payload.member;
-      console.log(state.member);
       state.value = true;
     },
     closeChat: (state) => {
