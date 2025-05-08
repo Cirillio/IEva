@@ -1,5 +1,5 @@
 import { Icon } from "@/icons";
-import { CopyButton } from "../../../components/ui/CopyButton";
+import { CopyButton } from "../../../components/ui/functional/CopyButton";
 import { UserTag } from "./UserTag";
 function Header() {
   return (
