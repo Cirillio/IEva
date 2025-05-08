@@ -124,6 +124,7 @@ export function MessangerPage() {
                 </div>
               </div>
             </motion.div>
+
           )}
         </AnimatePresence>
       </div>
