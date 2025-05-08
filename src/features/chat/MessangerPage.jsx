@@ -114,7 +114,7 @@ export function MessangerPage() {
               className="w-full h-full shadow-md bg-gray-400 rounded-3xl"
             >
               <div className="flex items-center justify-center h-full text-lg font-semibold text-white">
-                Чат закрыт
+                Чат закрыт (откройте страницу с компьютера)
               </div>
             </motion.div>
           )}
