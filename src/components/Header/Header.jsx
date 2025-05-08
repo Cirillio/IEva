@@ -12,7 +12,7 @@ const menuButtons = [
 ];
 
 const Header = () => (
-  <header className="min-h-full w-fit bg-base-100 flex gap-4 flex-col p-2">
+  <header className="min-h-full border-r-2 border-neutral-200/30 w-fit bg-base-100 flex gap-4 flex-col  p-1 sm:p-2">
     <div className="flex flex-col xl:flex-row w-full items-center gap-2 justify-between">
       <AppLogo size={24} />
       <ThemeToggler />

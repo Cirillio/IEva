@@ -1,5 +1,5 @@
 import { Icon } from "@/icons";
-import { CopyButton } from "../../../components/ui/CopyButton";
+import { CopyButton } from "../../../components/ui/functional/CopyButton";
 import { UserTag } from "./UserTag";
 function Header() {
   return (
@@ -7,7 +7,7 @@ function Header() {
       <div className="w-full max-h-60 z-0">
         <picture className="w-full h-full overflow-hidden flex relative">
           <img
-            src="/public/covers/cov1.png"
+            src="/covers/cov1.png"
             alt="cover "
             className="w-full h-full object-cover object-center"
           />
@@ -22,7 +22,7 @@ function Header() {
           <div className="w-full aspect-square  rounded-full">
             <img
               className="w-full object-cover object-center "
-              src="/public/avatars/av1.png"
+              src="/avatars/av1.png"
               alt="avatar"
             />
           </div>

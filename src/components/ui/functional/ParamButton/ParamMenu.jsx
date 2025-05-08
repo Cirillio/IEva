@@ -2,11 +2,13 @@ import * as Popover from "@radix-ui/react-popover";
 import { motion, AnimatePresence } from "framer-motion";
 import { Icon } from "@/icons";
 
-export function ParamMenu({ children }) {
+export function ParamMenu({ children, size = "md", setOpen, open }) {
   return (
-    <Popover.Root>
+    <Popover.Root open={open} onOpenChange={setOpen}>
       <Popover.Trigger asChild>
-        <button className="btn btn-circle btn-text focus:outline-none">
+        <button
+          className={`btn btn-circle btn-text active:bg-neutral-200/30 focus:outline-none btn-${size}`}
+        >
           <Icon name="dots" size="32" />
         </button>
       </Popover.Trigger>
@@ -15,9 +17,9 @@ export function ParamMenu({ children }) {
         <AnimatePresence>
           <Popover.Content align="end" forceMount asChild>
             <motion.div
-              initial={{ opacity: 0, scale: 0.95, y: -5 }}
+              initial={{ opacity: 0, scale: 0.9, y: -5 }}
               animate={{ opacity: 1, scale: 1, y: 0 }}
-              exit={{ opacity: 0, scale: 0.95, y: -5 }}
+              exit={{ opacity: 0, scale: 0.9, y: -5 }}
               transition={{ duration: 0.1, ease: "easeIn" }}
               className="z-[9999] mt-1 w-fit rounded-2xl bg-base-100 p-0 overflow-hidden items-center shadow-sm shadow-neutral/20 flex flex-col gap-0"
             >

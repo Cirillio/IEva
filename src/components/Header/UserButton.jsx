@@ -10,7 +10,7 @@ const UserButton = ({ name, username, avatar }) => {
   const navigate = useNavigate();
 
   return (
-    <div className="btn btn-text btn-lg xl:py-8 aspect-square px-0 xl:px-4 rounded-full btn-not-scale cursor-default relative">
+    <div className="btn btn-text btn-lg xl:py-8 aspect-square px-0 xl:px-2 rounded-full btn-not-scale cursor-default relative">
       <Link
         to="/profile"
         className="text-start xl:mr-28 flex gap-1 items-center cursor-pointer"

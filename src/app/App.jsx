@@ -7,7 +7,7 @@ import { Routes, Route } from "react-router-dom";
 function App() {
   FlyonUI();
   return (
-    <div className="flex h-dvh flex-1 justify-center">
+    <div className="flex h-dvh flex-1 sm:gap-2 justify-center">
       <Header />
       <main className="flex min-h-full z-0 flex-col max-w-[736px] flex-1">
         <Routes>
