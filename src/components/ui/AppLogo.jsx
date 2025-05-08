@@ -2,8 +2,8 @@ import { useAppSelector } from "../../app/hooks";
 import { LIGHT_THEME, DARK_THEME } from "../../features/theme/themeSlice";
 import { Link } from "react-router-dom";
 
-const LIGHT_LOGO = "/public/logo/logo_light.svg";
-const DARK_LOGO = "/public/logo/logo_black.svg";
+const LIGHT_LOGO = "/logo/logo_light.svg";
+const DARK_LOGO = "/logo/logo_black.svg";
 
 export default function AppLogo() {
   const theme = useAppSelector((state) => state.theme.value);
