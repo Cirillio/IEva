@@ -1,10 +1,18 @@
-export function ParamItem({ func, children }) {
-  return (
-    <button
-      onClick={func}
-      className="btn btn-sm w-full px-4 py-5 rounded-none btn-not-scale  justify-start btn-outline border-0 outline-0 hover:btn-secondary active:btn-primary transition-all duration-300"
-    >
-      {children}
-    </button>
-  );
+export function ParamItem({ func, children, type = "primary" }) {
+  if (type == "primary") {
+    return (
+      <button
+        onClick={func}
+        className="btn-soft  justify-start hover:btn-primary btn btn-sm border-0 rounded-none btn-not-scale btn-outline w-full p-2 flex-1 flex outline-0 active:opacity-70  transition-all duration-300"
+      >
+        {children}
+      </button>
+    );
+  } else if (type == "error") {
+    return (
+      <button className="btn-error  justify-start btn btn-sm border-0 rounded-none btn-not-scale btn-outline w-full p-2 flex-1 flex outline-0 active:opacity-70  transition-all duration-300">
+        {children}
+      </button>
+    );
+  }
 }

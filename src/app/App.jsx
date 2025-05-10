@@ -9,7 +9,7 @@ function App() {
   return (
     <div className="flex h-dvh flex-1 sm:gap-2 justify-center">
       <Header />
-      <main className="flex min-h-full z-0 flex-col max-w-[736px] flex-1">
+      <main className="flex min-h-full z-0 flex-col max-w-[848px] flex-1">
         <Routes>
           <Route path="/profile" element={<ProfilePage />} />
           <Route path="/messanger/:user_id" element={<MessangerPage />} />
