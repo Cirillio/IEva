@@ -1,18 +1,26 @@
-import { useEffect, useMemo } from "react";
-import "@/styles/chat-list.css";
-import { AnimatePresence, motion } from "framer-motion";
-import { Link, useParams } from "react-router-dom";
+import { useEffect, useMemo, useState } from "react";
 import { ParamMenu } from "../../components/ui/functional/ParamButton/ParamMenu";
+import { ParamItem } from "../../components/ui/functional/ParamButton/ParamItem";
+import { ParamDivider } from "../../components/ui/functional/ParamButton/ParamDevider";
+import { HorizontalDivider } from "../../components/ui/HorizontalDivider";
+import "@/styles/chat-list.css";
+import { useParams } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "../../app/hooks";
 import { openChat, closeChat } from "./ChatSlice";
-import { ChatList } from "./components/ChatList";
+import { motion } from "framer-motion";
 import { Icon } from "@/icons";
+
+import { ChatList } from "./ChatList";
+import { ChatWindowHeader } from "./components/ChatWindowHeader";
+import { ChatWindowFooter } from "./components/ChatWindowFooter";
 export function MessangerPage() {
   const { user_id } = useParams();
+  const [menuOpen, setMenuOpen] = useState(false);
 
   const dispatch = useAppDispatch();
   const chatState = useAppSelector((state) => state.chat.value);
   const chatMember = useAppSelector((state) => state.chat.member);
+  console.log(chatMember);
 
   const chat_members = useMemo(
     () => [
@@ -52,81 +60,113 @@ export function MessangerPage() {
   }, [chat_members, dispatch, user_id]);
 
   return (
-    <div className="flex h-full w-full ">
+    <div className="flex h-full lg:gap-2 gap-1 w-full">
       <div
-        id="chat-list"
-        className={`${
-          chatState ? "active" : ""
-        } h-full transition-all flex-1 sm:overflow-visible overflow-hidden flex duration-400 p-0 flex-col items-center `}
+        className="
+      h-full flex-0 md:flex-1/3 overflow-hidden flex flex-col items-center w-fit"
       >
         <ChatList members={chat_members} />
       </div>
-      <div
-        id="chat-window"
-        className={`${
-          chatState ? "w-full p-1" : "p-0 w-0"
-        } h-full duration-500 flex flex-col gap-2 transition-all`}
+      <motion.div
+        layout
+        initial={false}
+        animate={{ width: chatState ? "100%" : "0" }}
+        transition={{ duration: 0.4 }}
+        className="h-full flex-2/3 overflow-hidden"
       >
-        <AnimatePresence mode="wait">
-          {chatState && (
-            <motion.div
-              key="current-chat"
-              className="w-full flex h-full flex-col items-center rounded-2xl border-2 border-neutral-200/30"
-              initial={{ opacity: 0, scale: 0.98 }}
-              animate={{ opacity: 1, scale: 1 }}
-              exit={{ opacity: 0, scale: 0.1 }}
-              transition={{ duration: 0.5 }}
-            >
-              <div className="flex flex-col w-full">
-                <div className="grid grid-cols-[auto_1fr_auto] w-full p-2 items-center">
-                  <Link
-                    to="/messanger"
-                    onClick={() => dispatch(closeChat())}
-                    className="btn btn-sm p-1 btn-circle shadow-neutral-200/30 btn-outline border-0 shadow-sm"
-                  >
-                    <Icon size="24" name="fat-arrow-left" />
-                  </Link>
-                  <Link
-                    to={"/profile/" + chatMember.id}
-                    className="flex w-full text-lg overflow-x-hidden italic font-semibold px-4"
-                  >
-                    {chatMember.name}
-                  </Link>
-                  <div className="">
-                    <ParamMenu size="sm" />
+        <div className="w-full h-full">
+          <div className="w-full flex h-full flex-col items-center">
+            <div className="flex flex-col min-h-fit  w-full">
+              <ChatWindowHeader chatMember={chatMember ?? {}} />
+            </div>
+            <div className="h-full w-full flex overflow-y-auto hide-scrollbar flex-col">
+              <div class="chat chat-receiver p-2 group hover:bg-base-300/20 rounded-2xl transition-[background] flex flex-nowrap items-center gap-2">
+                <div class="chat-avatar mb-auto avatar">
+                  <div class="size-12 rounded-full">
+                    <img
+                      src="https://cdn.flyonui.com/fy-assets/avatar/avatar-1.png"
+                      alt="avatar"
+                    />
                   </div>
                 </div>
-                <div className="w-full p-2 flex">
-                  <span className="text-xs text-secondary-content bg-secondary py-1 px-3 shadow-sm shadow-neutral/30 flex rounded-2xl">
-                    Был в сети вчера
-                  </span>
-                </div>
-                <div className="w-full h-[2px] bg-neutral-200/30"></div>
-              </div>
-              <div className="w-full flex-1 h-full flex flex-col rounded-2xl">
-                <div className="h-full w-full"></div>
-                <div className="w-full flex p-2 items-center gap-2">
-                  <div className="w-full h-full flex max-w-lg">
-                    <textarea
-                      className="w-full h-full  rounded-2xl outline-2 duration-25 focus:outline-primary outline-secondary placeholder:text-neutral placeholder:italic px-3 py-2 bg-base-100/20 shadow-sm shadow-base-300/20 resize-none transition-all"
-                      placeholder="Напишите сообщение"
-                      rows={3}
-                    ></textarea>
+                <div>
+                  <div class="chat-header w-full flex flex-nowrap  text-base-content">
+                    {chatMember ? chatMember.name : ""}
+                    <time class="text-base-content/50 ml-1">12:45</time>
                   </div>
-                  <div className="flex sm:flex-row flex-col gap-1 sm:gap-2">
-                    <button className="btn active:btn-primary border-2 duration-75 p-2 sm:p-3 aspect-square h-fit btn-outline rounded-2xl shadow-sm shadow-base-300/20">
-                      <Icon name="send" size="30" />
-                    </button>
-                    <button className="btn active:btn-info border-2 duration-75 p-2 sm:p-3 aspect-square h-fit btn-outline rounded-2xl shadow-sm shadow-base-300/20">
-                      <Icon name="add-queue" size="30" />
-                    </button>
+                  <div className="flex gap-2">
+                    <div class="bg-base-300/10 rounded-2xl px-3 py-2 text-md">
+                      I started learning guitar I started learning guitar I
+                      started learning guitar I started learning guitar I
+                      started learning guitar I started learning guitar I
+                      started learning guitar I started learning guitar I
+                      started learning guitar I started learning guitar I
+                      started learning guitar
+                    </div>
+                    <div className="opacity-0 group-hover:opacity-100">
+                      <ParamMenu setOpen={setMenuOpen} open={menuOpen}>
+                        <ParamItem>
+                          <Icon name="star" size="24" />
+                          <p>Закрепить</p>
+                        </ParamItem>
+                        <ParamDivider h="2" />
+                        <ParamItem type="error">
+                          <Icon name="trash-one" size="24" />
+                          <p>Удалить</p>
+                        </ParamItem>
+                      </ParamMenu>
+                    </div>
+                  </div>
+                  <div class="chat-footer text-sm text-base-content/50">
+                    <div>Delivered</div>
                   </div>
                 </div>
               </div>
-            </motion.div>
-          )}
-        </AnimatePresence>
-      </div>
+              <div class="chat chat-sender p-2 group hover:bg-base-300/20 rounded-2xl transition-[background] flex flex-nowrap items-center gap-2">
+                <div class="chat-avatar mb-auto avatar">
+                  <div class="size-12 rounded-full">
+                    <img
+                      src="https://cdn.flyonui.com/fy-assets/avatar/avatar-2.png"
+                      alt="avatar"
+                    />
+                  </div>
+                </div>
+                <div>
+                  <div class="chat-header w-full flex flex-nowrap text-base-content">
+                    Cirillio
+                    <time class="text-base-content/50 ml-1">12:46</time>
+                  </div>
+                  <div className="flex gap-2">
+                    <div class="bg-primary text-primary-content px-3 py-2 rounded-2xl text-md">
+                      Не пиши сюда.
+                    </div>
+                    <div className="opacity-0 group-hover:opacity-100">
+                      <ParamMenu>
+                        <ParamItem>
+                          <Icon name="star" size="24" />
+                          <p>Закрепить</p>
+                        </ParamItem>
+                        <ParamDivider h="2" />
+                        <ParamItem type="error">
+                          <Icon name="trash-one" size="24" />
+                          <p>Удалить</p>
+                        </ParamItem>
+                      </ParamMenu>
+                    </div>
+                  </div>
+                  <div class="chat-footer text-sm text-base-content/50">
+                    Seen
+                    <span class="icon-[tabler--checks] text-success align-bottom ml-1"></span>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div className="flex w-full flex-col  min-h-fit">
+              <ChatWindowFooter />
+            </div>
+          </div>
+        </div>
+      </motion.div>
     </div>
   );
 }
