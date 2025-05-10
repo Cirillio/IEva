@@ -7,13 +7,14 @@ import { MicroAvatar, MicroNoAvatar } from "../../../components/ui/AvatarSizes";
 import { UserSubtitleLink } from "../../../components/ui/UserSubtitleLink";
 import { OnlineStatusBadge } from "../../../components/ui/OnlineStatusBadge";
 import { closeChat } from "../ChatSlice";
-import { useAppDispatch } from "../../../app/hooks";
+import { useAppDispatch, useAppSelector } from "../../../app/hooks";
 import { useState } from "react";
 
 export function ChatWindowHeader({ chatMember }) {
   const [menuOpen, setMenuOpen] = useState(false);
   const dispatch = useAppDispatch();
-  console.log(chatMember);
+  const member = useAppSelector((state) => state.chat.member);
+
   return (
     <div className="w-full flex p-2 gap-2 bg-base-300/10 rounded-b-2xl flex-col flex-1">
       <div className="grid grid-cols-[auto_1fr_auto] w-full items-center">
@@ -23,13 +24,13 @@ export function ChatWindowHeader({ chatMember }) {
           action={() => dispatch(closeChat())}
         />
         <span className="px-2  w-full flex overflow-hidden">
-          <UserSubtitleLink id={chatMember.id}>
-            {chatMember.avatar ? (
-              <MicroAvatar img={chatMember.avatar} />
+          <UserSubtitleLink id={member ? member.id : 0}>
+            {member && member.avatar ? (
+              <MicroAvatar img={member ? member.avatar : ""} />
             ) : (
-              <MicroNoAvatar letter={chatMember ? chatMember.name[0] : "N"} />
+              <MicroNoAvatar letter={member ? member.name[0] : "N"} />
             )}
-            {chatMember.name}
+            {member ? member.name : "x"}
           </UserSubtitleLink>
         </span>
         <div className="flex items-center gap-2">
